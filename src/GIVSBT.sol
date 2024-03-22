@@ -5,12 +5,12 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract Counter is ERC721, ERC721URIStorage, Ownable {
+contract GIVSBT is ERC721, ERC721URIStorage, Ownable {
     uint256 private _nextTokenId;
     mapping(uint256 => bool) _locked;
 
     constructor(address initialOwner)
-        ERC721("GivKey", "GIV")
+        ERC721("GivCertificate", "GivC")
         Ownable(initialOwner)
     {}
 
@@ -32,6 +32,14 @@ contract Counter is ERC721, ERC721URIStorage, Ownable {
 
     function getContractAddress() public view returns (address) {
         return address(this);
+    }
+    
+    function ownsToken(address user) public view returns (bool) {
+        return balanceOf(user) > 0;
+    }
+
+    function balanceToken(address user) public view returns (uint256) {
+        return balanceOf(user);
     }
 
     function _update(address to, uint256 tokenId, address auth)
